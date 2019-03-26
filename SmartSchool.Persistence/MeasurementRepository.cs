@@ -39,9 +39,9 @@ namespace SmartSchool.Persistence
             return _dbContext
                 .Measurements
                 .Include(sensor => sensor.Sensor)
-                .OrderByDescending(meas => meas.Value)
-                .ThenByDescending(meas => meas.Time)
-                .Where(sens => sens.Sensor.Location == location && sens.Sensor.Name == name)                
+                .OrderByDescending(m => m.Value)
+                .ThenByDescending(m => m.Time)
+                .Where(s => s.Sensor.Location == location && s.Sensor.Name == name)                
                 .Take(3)
                 .ToArray();                
         }
@@ -51,10 +51,10 @@ namespace SmartSchool.Persistence
             return _dbContext
                 .Measurements
                 .Include(sensor => sensor.Sensor)
-                .Where(sens => sens.Sensor.Location == location
-                && sens.Sensor.Name == name
-                && sens.Value > minValue
-                && sens.Value < maxValue)
+                .Where(s => s.Sensor.Location == location
+                && s.Sensor.Name == name
+                && s.Value > minValue
+                && s.Value < maxValue)
                 .Average(avg => avg.Value);                
         }
 
@@ -67,10 +67,10 @@ namespace SmartSchool.Persistence
                     (Sensor)sensor,
                     Math.Round(sensor
                         .Measurements
-                        .Select(measurement => measurement.Value)
+                        .Select(m => m.Value)
                         .Average(), 2)
-                )).OrderBy(sensor => sensor.Item1.Location)
-                .ThenBy(sensor => sensor.Item1.Name)
+                )).OrderBy(s => s.Item1.Location)
+                .ThenBy(s => s.Item1.Name)
                 .ToArray();
         }
     }
