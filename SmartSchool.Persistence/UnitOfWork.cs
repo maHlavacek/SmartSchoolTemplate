@@ -20,7 +20,7 @@ namespace SmartSchool.Persistence
             MeasurementRepository = new MeasurementRepository(_dbContext);
             SensorRepository = new SensorRepository(_dbContext);
 
-            MyLogger.InitializeLogger();
+          //  MyLogger.InitializeLogger(); //writes some information to the console
             Log.Information("Start Logging ...");
 
             var serviceProvider = _dbContext.GetInfrastructure();
